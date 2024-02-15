@@ -1,0 +1,37 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+
+  - repo: local
+    hooks:
+      - id: blue-check
+        name: blue --check . --diff
+        entry: blue --check . --diff
+        language: system
+        pass_filenames: false
+        types: [python]
+
+      - id: isort-check
+        name: isort --check . --diff
+        entry: isort --check . --diff
+        language: system
+        pass_filenames: false
+        types: [python]
+
+      - id: pytest
+        name: pytest -s -x
+        entry: pytest -s -x
+        language: system
+        pass_filenames: true
+        types: [python]
+
+      - id: pylint
+        name: pylint src/ tests/
+        entry: pylint src/ tests/
+        language: system
+        pass_filenames: true
+        types: [python]

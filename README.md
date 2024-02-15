@@ -9,3 +9,4 @@
 - [httpx](https://www.python-httpx.org/)
 - [isort](https://pycqa.github.io/isort/)
 - [ignr](https://github.com/Antrikshy/ignr.py)
+- [pylint](https://pypi.org/project/pylint/)
