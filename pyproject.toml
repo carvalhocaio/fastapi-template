@@ -19,7 +19,6 @@ blue = "^0.9.1"
 ruff = "^0.2.1"
 httpx = "^0.26.0"
 isort = "^5.13.2"
-pylint = "^3.0.3"
 ignr = "^2.2"
 
 [tool.ruff]
@@ -34,7 +33,6 @@ line_length = 79
 pythonpath = "."
 
 [tool.taskipy.tasks]
-pylint = 'pylint src/ tests/'
 lint = 'ruff . && blue --check . --diff && isort --check . --diff'
 format = 'blue .  && isort .'
 run = 'uvicorn src.app:app --reload'
