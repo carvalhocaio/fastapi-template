@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  database:
+    container_name: database
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  fastapi_app:
+    container_name: app
+    image: fastapi_app
+    entrypoint: ./entrypoint.sh
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@database:5432/postgres
+
+volumes:
+  pgdata:
