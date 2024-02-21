@@ -1,0 +1,37 @@
+name: Pipeline
+on: [push, pull_request]
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: app_db
+          POSTGRES_PASSWORD: app_password
+          POSTGRES_USER: app_user
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Copy files from the repository
+        uses: actions/checkout@v3
+
+      - name: Install the Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.7'
+
+      - name: Install the Poetry
+        run: pipx install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run tests
+        run: poetry run task test

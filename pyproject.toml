@@ -25,14 +25,18 @@ pylint = "^3.0.3"
 
 [tool.ruff]
 line-length = 79
-exclude = ['.venv']
+exclude = ['.venv', 'migrations']
 
 [tool.isort]
 profile = "black"
 line_length = 79
+extend_skip = ['migrations']
 
 [tool.pytest.ini_options]
 pythonpath = "."
+
+[tool.blue]
+extend-exclude = '(migrations/)'
 
 [tool.taskipy.tasks]
 pylint = 'pylint src/ tests/'
